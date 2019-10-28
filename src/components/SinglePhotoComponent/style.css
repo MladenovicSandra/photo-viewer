@@ -1,0 +1,36 @@
+.photo-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: 1rem;
+    height: 250px;
+    width: 250px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+.link-style {
+    text-decoration: none;
+    color: black;
+}
+.photo {
+    height: 200px;
+    width: 200px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.all-photos-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.photo-container:hover{
+    border-radius: 30px;
+    border: 1px solid darkgrey;
+    transition: all 0.3s ease 0s;
+}

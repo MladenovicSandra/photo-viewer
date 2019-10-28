@@ -1,0 +1,27 @@
+.input-and-save {
+    margin-top: 1rem;
+    z-index: 200;
+}
+.save-btn {
+    font-size: 1rem;
+    color: #20bf6b;
+    background: #ffffff;
+    padding: 10px;
+    border: 1px solid #20bf6b;
+    border-radius: 6px;
+    transition: all 0.3s ease 0s;
+}
+.save-btn:hover {
+    color: #494949 ;
+    border-radius: 50px;
+    border-color: #494949 ;
+    transition: all 0.3s ease 0s;
+}
+.input-title {
+    padding:10px; 
+    background:white; 
+    border: 1px solid #494949;
+    cursor:pointer;
+    border-radius: 6px; 
+    margin-right: 10px;
+}

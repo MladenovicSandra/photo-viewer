@@ -1,0 +1,76 @@
+.photo-details-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin: 3rem;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-family: 'Roboto', sans-serif;
+}
+.photo-and-details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+.photo-item {
+    height: 300px;
+    width: 300px;
+}
+.details-container-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
+.details-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+}
+.main-label {
+    text-align: center;
+    padding-bottom: 1rem;
+    color: black;
+    font-size: 1.5rem;
+}
+.label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding-bottom: 2px;
+}
+.item {
+    font-size: 1rem;
+    padding-bottom: 8px;
+    color: black;
+}
+.edit-title {
+    margin-top: 4rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #20bf6b;
+    text-transform: uppercase;
+    background: #ffffff;
+    padding: 10px;
+    border: 1px solid #20bf6b;
+    border-radius: 6px;
+    transition: all 0.3s ease 0s;
+}
+.edit-title:hover {
+    color: #494949 ;
+    border-radius: 50px;
+    border-color: #494949 ;
+    transition: all 0.3s ease 0s;
+}
+@media only screen and (max-width: 750px) {
+    .photo-and-details-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .details-container {
+        padding-top: 2rem;
+    }
+}
