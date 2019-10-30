@@ -12,7 +12,7 @@ export default class Main extends React.Component {
                 <BrowserRouter>
                     <Navigation />
 
-                    <div>
+                    <div className='routes'>
                         <Switch>
                             <Route exact path='/' component={PhotoList} />
                             <Route exact path='/details/:id' component={PhotoDetails} />

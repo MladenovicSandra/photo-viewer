@@ -8,6 +8,12 @@
     margin-left: 15%;
     margin-right: 15%;
     font-family: 'Roboto', sans-serif;
+    background-color: white;
+}
+.main-container {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, white, #e4e4e4);
 }
 .photo-and-details-container {
     display: flex;
@@ -47,23 +53,10 @@
     padding-bottom: 8px;
     color: black;
 }
-.edit-title {
-    margin-top: 4rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #20bf6b;
-    text-transform: uppercase;
-    background: #ffffff;
-    padding: 10px;
-    border: 1px solid #20bf6b;
-    border-radius: 6px;
-    transition: all 0.3s ease 0s;
-}
-.edit-title:hover {
-    color: #494949 ;
-    border-radius: 50px;
-    border-color: #494949 ;
-    transition: all 0.3s ease 0s;
+.btn-container {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
 }
 @media only screen and (max-width: 750px) {
     .photo-and-details-container{

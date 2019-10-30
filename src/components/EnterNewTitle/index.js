@@ -1,20 +1,22 @@
 import React from 'react'
 import './style.css'
+import { Button } from 'react-bootstrap'
 
 export default class EnterNewTitle extends React.Component{
     constructor(){
         super()
         this.state = {
-            inputValue : ''
+            inputValue : '',
+            successfulChange : false
         }
     }
     onChangeHandler = (e) => {
         this.setState({
-            inputValue: e.target.value
+            inputValue: e.target.value,
+            successfulChange: false
         })
     }
-    handleSubmit = (e) => {
-        e.preventDefault()
+    handleSubmit = () => {
         console.log(this.state.inputValue)
         const putMethod = {
             method: 'PUT',
@@ -29,14 +31,30 @@ export default class EnterNewTitle extends React.Component{
         }
         fetch(`https://jsonplaceholder.typicode.com/photos/${this.props.identificationNum}`, putMethod)
         .then(response => response.json())
-        .then(data => console.log(data)) 
+        .then(data => {
+                console.log(data)
+                this.setState({
+                    successfulChange: true
+                })
+            }) 
     }
     render(){
+        let successfulChange = null
+        if(this.state.successfulChange){
+            successfulChange = <span>The title has been successfuly changed!</span>
+        }
         return (
-            <form onSubmit={this.handleSubmit} className='input-and-save'>
-                <input onChange={this.onChangeHandler} className='input-title' type='text' placeholder='Enter the new title here...' />
-                <button className='save-btn'>Save changes</button>
-            </form>
+            <div  className='modal-container'>
+                <div className='input-and-btn-container'>
+                    <input onChange={this.onChangeHandler} className='input-title' type='text' placeholder='New photo title...' />
+                    <Button variant="outline-dark" onClick={this.handleSubmit}>
+                            Submit
+                    </Button>
+                </div>
+                <div className='report-container'>
+                    {successfulChange}  
+                </div>
+            </div>
         )
     }
 }

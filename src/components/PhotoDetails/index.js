@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import './style.css'
 import EnterNewTitle from '../EnterNewTitle'
-import Backdrop from '../Backdrop'
+import { Modal, Button } from 'react-bootstrap'
 
 export default class PhotoDetails extends Component {
     constructor(props){
         super(props)
         this.state = {
             photo: {},
-            allow: false
+            show: false,
+            showDelete: false
         }
     }
     componentDidMount(){
@@ -17,14 +18,37 @@ export default class PhotoDetails extends Component {
         .then(res => res.json())
         .then(data => {
             this.setState({
-                setShow: false,
-                show: false
+                photo: data
             })
         })
     }
     handleShow = () => {
         this.setState({
-            setShow: true
+            show: true
+        })
+    }
+    handleShowDelete = () => {
+        this.setState({
+            showDelete: true
+        })
+    }
+    handleClose = () => {
+        this.setState({
+            show: false
+        })
+    }
+    handleCloseDelete = () => {
+        this.setState({
+            showDelete: false
+        })
+    }
+    fetchDelete = () => {
+        fetch(`https://jsonplaceholder.typicode.com/photos/${this.props.match.params.id}`,
+            {method: 'DELETE'})
+            .then(res => res.json())
+            .then(data => console.log(data))
+        this.setState({
+            showDelete: false
         })
     }
     render() {
@@ -33,18 +57,8 @@ export default class PhotoDetails extends Component {
         if(title){
             titleCapitalized = title.charAt(0).toUpperCase() + title.slice(1)
         }
-        let allow = false
-        let component = null
-        let backdrop = null
-        if(this.state.allow){
-            component = <EnterNewTitle 
-                            identificationNum={this.props.match.params.id} 
-                            url = {this.state.photo.url}
-                            thumbnailUrl = {this.state.photo.thumbnailUrl}
-                        />
-            backdrop = <Backdrop />
-        }
         return (
+            <div className='main-container'>
             <div className='photo-details-container'>
                 <span className='main-label'>Photo Details</span>
                 <div className='photo-and-details-container'>
@@ -60,16 +74,54 @@ export default class PhotoDetails extends Component {
                             <a href={this.state.photo.url} className='item'>{this.state.photo.url}</a>
                             <span className='label'>Thumbnail url:</span>
                             <a href={this.state.photo.url} className='item'>{this.state.photo.thumbnailUrl}</a>
+                            
+                            <div className='btn-container'> 
+                                <Button variant="outline-dark" onClick={this.handleShow}>
+                                    Edit title
+                                </Button>
+                                <Button variant="outline-danger" onClick={this.handleShowDelete}>
+                                    Delete
+                                </Button>
+                            </div>
 
-                            <button 
-                                className='edit-title'
-                                onClick={this.handleShow}
-                            >
-                                Click here to edit the title!
-                            </button>
+                            <Modal show={this.state.show} onHide={this.handleClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Edit Title</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <EnterNewTitle
+                                        identificationNum = {this.state.photo.id}
+                                        url = {this.state.photo.url}
+                                        thumbnailUrl = {this.state.photo.thumbnailUrl}
+                                    />
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={this.handleClose}>
+                                        Close
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+
+                            <Modal show={this.state.showDelete} onHide={this.handleCloseDelete}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Delete Photo</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <span>Are you sure you want to delete this photo?</span>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="outline-dark" onClick={this.fetchDelete}>
+                                        Yes
+                                    </Button>
+                                    <Button variant="outline-dark" onClick={this.handleCloseDelete}>
+                                            No
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         )
     }

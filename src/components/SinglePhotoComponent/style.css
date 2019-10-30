@@ -6,31 +6,39 @@
     padding-left: 2rem;
     padding-right: 2rem;
     margin: 1rem;
-    height: 250px;
-    width: 250px;
-    border: 1px solid lightgray;
-    border-radius: 5px;
+    height: 300px;
+    width: 300px;
+    border-radius: 8px;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
 }
 .link-style {
     text-decoration: none;
     color: black;
 }
 .photo {
-    height: 200px;
-    width: 200px;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    height: 150px;
+    width: 150px;
+    margin-bottom: 1rem;
 }
 .all-photos-container {
     display: flex;
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+    background-image: linear-gradient(to bottom right, white, #e4e4e4);
+    padding-left: 10%;
+    padding-right: 10%;
 }
 .photo-container:hover{
     border-radius: 30px;
-    border: 1px solid darkgrey;
+    border: 1px solid lightgray;
     transition: all 0.3s ease 0s;
+    color: black;
+}
+.link-style:hover {
+    text-decoration: none;
+    color: black;
 }
