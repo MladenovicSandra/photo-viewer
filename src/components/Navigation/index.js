@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './style.css'
 import { connect } from 'react-redux'
 import { openAddNewPhotoAction } from '../../store/actions/addNewPhotoAction'
+import { FaPlus } from 'react-icons/fa'
 
 class Navigation extends Component {
     render() {
@@ -19,7 +20,10 @@ class Navigation extends Component {
                         <span className='container-item'>PHOTOS</span>
                     </Link>
                     
-                    <span className='container-item' onClick={this.props.openAddNewPhoto}>ADD NEW PHOTO</span>  
+                    <span className='container-item' onClick={this.props.openAddNewPhoto}>
+                        <FaPlus className='icon' />
+                        ADD NEW PHOTO
+                    </span>  
                 </div>
             </div>
         )

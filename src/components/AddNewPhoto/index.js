@@ -10,12 +10,14 @@ class AddNewPhoto extends React.Component{
         this.state = {
             title : '',
             thumbnailUrl : '',
-            photoUrl : ''
+            photoUrl : '',
+            successfulAdd: false
         }
     }
     handleChange = (e) => {
         this.setState({
-            [e.target.id] : e.target.value
+            [e.target.id] : e.target.value,
+            successfulAdd: false
         })
     }
     handleSubmit = () => {
@@ -35,9 +37,16 @@ class AddNewPhoto extends React.Component{
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            this.setState({
+                successfulAdd: true
+            })
         })
     }
     render (){
+        let successfulAdd = null
+        if(this.state.successfulAdd){
+            successfulAdd = <span>The photo has been successfully added!</span>
+        }
         return (
             <Modal show={this.props.show} onHide={this.props.handleClose}>
                <Modal.Header closeButton>
@@ -57,6 +66,9 @@ class AddNewPhoto extends React.Component{
                             <div className='label-and-input'>
                                  <span className='label'>Photo URL:</span>
                                  <input id='photoUrl' className='input' onChange={this.handleChange} type='text' placeholder='Enter the photo url here...' />
+                            </div>
+                            <div className='report-container'>
+                                {successfulAdd}  
                             </div>
                        </div>
                    </div>

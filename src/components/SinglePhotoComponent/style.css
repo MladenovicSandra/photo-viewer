@@ -30,6 +30,7 @@
     flex-wrap: wrap;
     padding-left: 10%;
     padding-right: 10%;
+    background-image: linear-gradient(to bottom right, white, #e4e4e4);
 }
 .photo-container:hover{
     border-radius: 30px;
