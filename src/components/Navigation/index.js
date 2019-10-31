@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './style.css'
+import { connect } from 'react-redux'
+import { openAddNewPhotoAction } from '../../store/actions/addNewPhotoAction'
 
-export default class Navigation extends Component {
+class Navigation extends Component {
     render() {
         return (
             <div className='menu-container'>
@@ -16,9 +18,18 @@ export default class Navigation extends Component {
                     <Link to='/' style={{ textDecoration: 'none' }}>
                         <span className='container-item'>PHOTOS</span>
                     </Link>
-                    <span className='container-item'>ADD NEW PHOTO</span>
+                    
+                    <span className='container-item' onClick={this.props.openAddNewPhoto}>ADD NEW PHOTO</span>  
                 </div>
             </div>
         )
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        openAddNewPhoto: () => {
+            dispatch(openAddNewPhotoAction())
+        }
+    }
+}
+export default connect(null, mapDispatchToProps)(Navigation)

@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import './style.css'
-import EnterNewTitle from '../EnterNewTitle'
-import { Modal, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import { openEditTitleAction } from '../../store/actions/editTitleAction'
+import { connect } from 'react-redux'
+import ModalEditTitle from '../ModalEditTitle'
+import ModalDeletePhoto from '../ModalDeletePhoto'
+import { openDeletePhotoAction } from '../../store/actions/deletePhotoAction'
 
-export default class PhotoDetails extends Component {
+class PhotoDetails extends Component {
     constructor(props){
         super(props)
         this.state = {
-            photo: {},
-            show: false,
-            showDelete: false
+            photo: {}
         }
     }
     componentDidMount(){
@@ -22,43 +24,16 @@ export default class PhotoDetails extends Component {
             })
         })
     }
-    handleShow = () => {
-        this.setState({
-            show: true
-        })
-    }
-    handleShowDelete = () => {
-        this.setState({
-            showDelete: true
-        })
-    }
-    handleClose = () => {
-        this.setState({
-            show: false
-        })
-    }
-    handleCloseDelete = () => {
-        this.setState({
-            showDelete: false
-        })
-    }
-    fetchDelete = () => {
-        fetch(`https://jsonplaceholder.typicode.com/photos/${this.props.match.params.id}`,
-            {method: 'DELETE'})
-            .then(res => res.json())
-            .then(data => console.log(data))
-        this.setState({
-            showDelete: false
-        })
-    }
     render() {
         let title = this.state.photo.title
         let titleCapitalized
         if(title){
             titleCapitalized = title.charAt(0).toUpperCase() + title.slice(1)
         }
+        console.log(this.props)
         return (
             <div className='main-container'>
+            <div>
             <div className='photo-details-container'>
                 <span className='main-label'>Photo Details</span>
                 <div className='photo-and-details-container'>
@@ -76,53 +51,33 @@ export default class PhotoDetails extends Component {
                             <a href={this.state.photo.url} className='item'>{this.state.photo.thumbnailUrl}</a>
                             
                             <div className='btn-container'> 
-                                <Button variant="outline-dark" onClick={this.handleShow}>
+                                <Button variant="outline-dark" onClick={() => this.props.openEditTitle(this.state.photo)}>
                                     Edit title
                                 </Button>
-                                <Button variant="outline-danger" onClick={this.handleShowDelete}>
+                                <Button variant="outline-danger" onClick={() => this.props.openDeletePhoto(this.state.photo.id)}>
                                     Delete
                                 </Button>
                             </div>
 
-                            <Modal show={this.state.show} onHide={this.handleClose}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Edit Title</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <EnterNewTitle
-                                        identificationNum = {this.state.photo.id}
-                                        url = {this.state.photo.url}
-                                        thumbnailUrl = {this.state.photo.thumbnailUrl}
-                                    />
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button variant="secondary" onClick={this.handleClose}>
-                                        Close
-                                    </Button>
-                                </Modal.Footer>
-                            </Modal>
-
-                            <Modal show={this.state.showDelete} onHide={this.handleCloseDelete}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Delete Photo</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <span>Are you sure you want to delete this photo?</span>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button variant="outline-dark" onClick={this.fetchDelete}>
-                                        Yes
-                                    </Button>
-                                    <Button variant="outline-dark" onClick={this.handleCloseDelete}>
-                                            No
-                                    </Button>
-                                </Modal.Footer>
-                            </Modal>
+                            <ModalEditTitle />
+                            <ModalDeletePhoto />
                         </div>
                     </div>
                 </div>
             </div>
             </div>
+            </div>
         )
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        openEditTitle: (photo) => {
+            dispatch(openEditTitleAction(photo))
+        },
+        openDeletePhoto: (id) => {
+            dispatch(openDeletePhotoAction(id))
+        }
+    }
+}
+export default connect(null,mapDispatchToProps)(PhotoDetails)
