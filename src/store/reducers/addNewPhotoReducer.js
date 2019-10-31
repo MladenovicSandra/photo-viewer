@@ -10,7 +10,9 @@ const addNewPhotoReducer = ( state = initState, action) => {
         case 'CLOSE_ADD_NEW_PHOTO': {
             return{...state, showAddNewPhoto:false}
         }
+        default: {
+            return state  
+        }
     }
-    return state  
 }
 export default addNewPhotoReducer

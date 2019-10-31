@@ -14,7 +14,9 @@ const editTitleReducer = ( state = initState, action) => {
         case 'CLOSE_EDIT_TITLE_ACTION': {
             return{...state, showEditTitle:false}
         }
+        default: {
+            return state
+        }
     }
-    return state  
 }
 export default editTitleReducer

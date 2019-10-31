@@ -27,7 +27,9 @@ const photosReducer = (state = initData, action) => {
                 fail: true
             }
         }
+        default: {
+            return state
+        }
     }
-    return state
 }
 export default photosReducer

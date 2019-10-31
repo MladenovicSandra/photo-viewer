@@ -14,7 +14,9 @@ const deletePhotoReducer = ( state = initState, action) => {
         case 'CLOSE_DELETE_PHOTO_ACTION': {
             return{...state, showDeletePhoto:false}
         }
+        default: {
+            return state
+        }
     }
-    return state  
 }
 export default deletePhotoReducer
